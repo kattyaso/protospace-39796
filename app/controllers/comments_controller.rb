@@ -2,9 +2,9 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   
   def create
-    comment = Comment.new(comment_params)
-    if comment.save
-      redirect_to "/prototypes/#{comment.prototype.id}"
+    @comment = Comment.new(comment_params)
+    if @comment.save
+      redirect_to prototype_path(@comment.prototype)
     else
       @prototype = @comment.prototype
       @comments = @prototype.comments
